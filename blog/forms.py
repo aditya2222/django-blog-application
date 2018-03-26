@@ -27,7 +27,3 @@ class CommentForm(forms.ModelForm):
 
 
 
-
-
-
-

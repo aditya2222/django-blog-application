@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from blog.forms import PostForm,CommentForm
 from django.urls import reverse_lazy
+from django.db.models import Q
 # Create your views here.
 
 
@@ -98,12 +99,24 @@ def comment_remove(request,pk):
 
 
 
+# search functionality
+
+def your_view(request):
+    ''' This could be your actual view or a new one '''
+    # Your code
+    if request.method == 'GET': # If the form is submitted
+
+        search_query = request.GET.get('search_box', None)
+        print(search_query)
+        # Do whatever you need with the word the user looked for
+
+    # Your code 
 
 
-
-
-
-
-
-
+class SearchListView(ListView):
+    model = Post
+   
+    def get_queryset(self):
+        username = self.request.GET.get("query",False)
+        return Post.objects.filter(title__contains=username).order_by('-published_date')
 

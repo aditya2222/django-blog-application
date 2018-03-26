@@ -1,13 +1,15 @@
 {% extends "blog/base.html" %}
-
-
 {% block content %}
+<form type="get" action="{% url 'search_list' %}" style="margin: 0">
+    <input  id="search_box" type="text" name="query"  placeholder="Search..." >
+    <button id="search_submit" type="submit" >Submit</button>
+</form>
 <div class="centrestage">
 {% for post in post_list %}
 <div class="post">
 <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
 <div class="date">
-<p>Published On: {{post.published_date|date:"D M Y"}}</p>
+<p >Published On: {{post.published_date|date:"D M Y"}}</p>
 </div>
 <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.approve_comments.count}}</a>
 </div>
